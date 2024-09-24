@@ -48,31 +48,17 @@ public class Application {
             throw new RuntimeException("参数必须为自然数");
         }
         num = Math.min(10000, num);
-        boolean duplicate;
         List<Problem> problems = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            duplicate = false;
             // 生成题目
-            Problem problem = Problem.generateProblem(range);
-            // 判断重复
-            for (Problem item : problems) {
-                if (Problem.checkDuplicate(item, problem)) {
-                    duplicate = true;
-                    break;
-                }
-            }
-            if (duplicate) {
-                i--;
-                continue;
-            }
-            problems.add(problem);
+            problems.add(ProblemGenerator.generateProblem(range));
         }
         // 输出结果
         List<String> exercises = new ArrayList<>();
         List<String> answers = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            exercises.add(i + "." + problems.get(i).getExercises());
-            answers.add(i + "." + problems.get(i).getAnswers());
+            exercises.add(i + ". " + problems.get(i).getExercises());
+            answers.add(i + ". " + problems.get(i).getAnswers());
         }
         FileUtil.writeFile("Exercises.txt", exercises);
         FileUtil.writeFile("Answers.txt", answers);
@@ -90,10 +76,10 @@ public class Application {
         List<String> gradeIndex = new ArrayList<>();
         for (int i = 0; i < exerciseFile.size(); i++) {
             try {
-                String[] exercise = exerciseFile.get(i).split("\\.");
-                String[] answer = answerFile.get(i).split("\\.");
+                String[] exercise = exerciseFile.get(i).split("\\. ");
+                String[] answer = answerFile.get(i).split("\\. ");
                 // 判定答案
-                if (Problem.judge(exercise[1], answer[1])) {
+                if (ProblemGenerator.judgeProblem(exercise[1], answer[1])) {
                     correctIndex.add(exercise[0]);
                     correct++;
                 } else {

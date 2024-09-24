@@ -12,7 +12,6 @@ public class MainTest {
     @Test
     public void test2() {
         Main.main(new String[]{"-n", "10", "-r", "10"});
-
     }
 
     @Test
@@ -32,6 +31,16 @@ public class MainTest {
 
     @Test
     public void test6() {
-        Main.main(new String[]{"-e", "exerciseFile.txt", "-a", "answerFile.txt"});
+        Main.main(new String[]{"-e", "e", "-a", "a"});
+    }
+
+    @Test
+    public void test7() {
+        Main.main(new String[]{"-e", "Exercises.txt", "-a", "Answers.txt"});
+    }
+
+    @Test
+    public void test8() {
+        Main.main(new String[]{"-e", "Exercises.txt", "-a", "ErrorAnswers.txt"});
     }
 }

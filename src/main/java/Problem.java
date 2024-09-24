@@ -7,18 +7,6 @@ public class Problem {
     private String exercises;
     private String answers;
 
-    public static Problem generateProblem(int r) {
-        return new Problem();
-    }
-
-    public static boolean checkDuplicate(Problem p1, Problem p2) {
-        return false;
-    }
-
-    public static boolean judge(String exercises, String answers) {
-        return false;
-    }
-
     public Problem() {
     }
 
