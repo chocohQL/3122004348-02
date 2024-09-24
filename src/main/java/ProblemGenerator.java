@@ -13,7 +13,6 @@ public class ProblemGenerator {
      * 生成题目
      */
     public static Problem generateProblem(int r) {
-        Problem problem = new Problem();
         String exercises = generateExercises(r);
         String answer = calculateAnswer(exercises);
         // 循环直到题目符合要求
@@ -21,9 +20,7 @@ public class ProblemGenerator {
             exercises = generateExercises(r);
             answer = calculateAnswer(exercises);
         }
-        problem.setExercises(exercises);
-        problem.setAnswers(answer);
-        return problem;
+        return new Problem(exercises, answer);
     }
 
     /**

@@ -43,4 +43,14 @@ public class MainTest {
     public void test8() {
         Main.main(new String[]{"-e", "Exercises.txt", "-a", "ErrorAnswers.txt"});
     }
+
+    @Test
+    public void test9() {
+        Main.main(new String[]{"-e", "Exercises.txt", "-b", "ErrorAnswers.txt"});
+    }
+
+    @Test
+    public void test10() {
+        Main.main(new String[]{"-n", "10", "-f", "10"});
+    }
 }

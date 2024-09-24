@@ -10,8 +10,8 @@ public class Application {
      * 启动程序
      */
     public static void run(String[] args) {
-        Map<String, String> params = parseParams(args);
         try {
+            Map<String, String> params = parseParams(args);
             if (params.get("-r") != null && params.get("-n") != null) {
                 generateProblems(params.get("-n"), params.get("-r"));
             } else if (params.get("-e") != null && params.get("-a") != null) {
@@ -28,8 +28,8 @@ public class Application {
      * 解析参数
      */
     public static Map<String, String> parseParams(String[] args) {
-        if (args.length % 2 == 1) {
-            throw new RuntimeException("请检查参数");
+        if (args.length != 4) {
+            throw new RuntimeException("无法解析参数");
         }
         Map<String, String> params = new HashMap<>();
         for (int i = 0; i < args.length; i += 2) {
@@ -56,9 +56,9 @@ public class Application {
         // 输出结果
         List<String> exercises = new ArrayList<>();
         List<String> answers = new ArrayList<>();
-        for (int i = 0; i < num; i++) {
-            exercises.add(i + ". " + problems.get(i).getExercises());
-            answers.add(i + ". " + problems.get(i).getAnswers());
+        for (int i = 1; i <= num; i++) {
+            exercises.add(i + ". " + problems.get(i).exercises);
+            answers.add(i + ". " + problems.get(i).answers);
         }
         FileUtil.writeFile("Exercises.txt", exercises);
         FileUtil.writeFile("Answers.txt", answers);
