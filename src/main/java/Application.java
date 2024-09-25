@@ -56,9 +56,9 @@ public class Application {
         // 输出结果
         List<String> exercises = new ArrayList<>();
         List<String> answers = new ArrayList<>();
-        for (int i = 1; i <= num; i++) {
-            exercises.add(i + ". " + problems.get(i).exercises);
-            answers.add(i + ". " + problems.get(i).answers);
+        for (int i = 0; i < num; i++) {
+            exercises.add(i + 1 + ". " + problems.get(i).exercises);
+            answers.add(i + 1 + ". " + problems.get(i).answers);
         }
         FileUtil.writeFile("Exercises.txt", exercises);
         FileUtil.writeFile("Answers.txt", answers);

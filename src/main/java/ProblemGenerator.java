@@ -90,14 +90,29 @@ public class ProblemGenerator {
             char op = operator.pop();
             Fraction num2 = numStack.pop();
             Fraction num1 = numStack.pop();
-            if (op == '+') {
-                numStack.push(num1.add(num2));
-            } else if (op == '-') {
-                // 如果存在形如e1− e2的子表达式，那么e1≥e2
-                if (num1.compareTo(num2) >= 0) {
-                    numStack.push(num1.subtract(num2));
+            if (op == '+' || op == '-') {
+                // 优先计算乘除
+                if (!operator.isEmpty() && (operator.peek() == '×' || operator.peek() == '÷')) {
+                    Fraction num3 = numStack.pop();
+                    Character op1 = operator.pop();
+                    if (op1 == '×') {
+                        num1 = num1.multiply(num3);
+                    } else if (op1 == '÷') {
+                        if (num3.getNumerator() == 0) {
+                            return null;
+                        }
+                        num1 = num1.divide(num3);
+                    }
+                }
+                if (op == '+') {
+                    numStack.push(num1.add(num2));
                 } else {
-                    return null;
+                    // 如果存在形如e1− e2的子表达式，那么e1≥e2
+                    if (num1.compareTo(num2) >= 0) {
+                        numStack.push(num1.subtract(num2));
+                    } else {
+                        return null;
+                    }
                 }
             } else if (op == '×') {
                 numStack.push(num1.multiply(num2));
